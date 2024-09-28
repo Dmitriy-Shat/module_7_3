@@ -1,0 +1,38 @@
+class WordsFinder:
+
+  def __init__(self):
+    self.file_names = []
+  
+  def object_words(self, *name_file):
+    for names in name_file:
+      self.file_names.append(names)
+      
+    return self.file_names
+    
+
+  def get_all_words(self):
+    all_words = {}
+    signs = [',', '.', '=', '!', '?', ';', ':', ' - ']
+    params_ = self.object_words()
+    for names in params_:
+      with open(names, encoding='utf-8') as file:
+        for line_ in file:
+          line_low = line_.lower()
+          for sign in signs:
+            if sign in line_low:
+              line_low.replace(sign, '')
+              
+        all_words[names] = line_low
+    return print(all_words)
+
+words_finder = WordsFinder()
+words_finder.object_words('test_file1.txt', 'test_file2.txt')
+words_finder.get_all_words()
+
+
+#name = 'test_file1.txt'
+#with open(name, encoding='utf-8') as file:
+  #for i in file:
+    #print(i, end='')
+    
+
