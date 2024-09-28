@@ -5,18 +5,16 @@ class WordsFinder:
   
   def object_words(self, *name_file):
     for names in name_file:
-      self.file_names.append(names)
-      
+      self.file_names.append(names)  
     return self.file_names
     
-
   def get_all_words(self):
     all_words = {}
     signs = [',', '.', '=', '!', '?', ';', ':', ' - ']
     params_ = self.object_words()
     for names in params_:
+      text = ''
       with open(names, encoding='utf-8') as file:
-        text = ''
         for line_ in file:
           line_low = line_.lower()
           for sign in signs:
@@ -38,7 +36,7 @@ class WordsFinder:
         count_word += 1  
     return dikt_
     
-  def get_all_words(self, word):
+  def count(self, word):
     dikt_ = {}
     a = self.get_all_words()
     for key, value in a.items():
@@ -46,23 +44,11 @@ class WordsFinder:
       for i in value:
         if i.lower() == word.lower():
            count_word += 1
-        dikt_[key] = count_word
-        return print(dikt_)
+    dikt_[key] = count_word
+    return dikt_
           
 words_finder = WordsFinder()
 words_finder.object_words('test_file1.txt', 'test_file2.txt')
-words_finder.get_all_words()
-words_finder.find('Captain')
-words_finder.get_all_words('Captain')
-
-#name = 'test_file1.txt'
-#with open(name, encoding='utf-8') as file:
-  #for i in file:
-    #print(i, end='')
-
-#signs = [',', '.', '=', '!', '?', ';', ':', ' - ']
-#a = 'Привет, меня зовут?!.'       
-#for sign in signs:
-    #a = a.replace(sign, '')
-#print(a)
- 
+print(words_finder.get_all_words())
+print(words_finder.find('Captain'))
+print(words_finder.count('Captain'))
